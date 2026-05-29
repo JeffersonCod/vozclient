@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VozCliente — Apresentação</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c1628;
+  --blue: #1a56db;
+  --gold: #f59e0b;
+  --gold2: #fbbf24;
+  --teal: #0d9488;
+  --muted: #94a3b8;
+  --text: #f1f5f9;
+  --border: rgba(255,255,255,0.09);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* fundo com gradiente */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 10% 0%, rgba(26,86,219,.18) 0, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 100%, rgba(13,148,136,.12) 0, transparent 60%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── BARRA SUPERIOR ── */
+.topbar {
+  position: relative; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 32px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(12,22,40,.8);
+  backdrop-filter: blur(8px);
+}
+.topbar-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem; font-weight: 900;
+  color: var(--gold); letter-spacing: -0.5px;
+}
+.topbar-info {
+  font-size: .78rem; color: var(--muted); font-weight: 600;
+}
+.slide-counter {
+  font-family: 'Fraunces', serif;
+  font-size: .9rem; color: var(--gold); font-weight: 900;
+}
+
+/* ── ÁREA DO SLIDE ── */
+.stage {
+  flex: 1;
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+.slide {
+  display: none;
+  width: 100%; height: 100%;
+  padding: 48px 80px;
+  flex-direction: column;
+  justify-content: center;
+  animation: fadeUp .4s ease both;
+}
+.slide.active { display: flex; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* número da seção */
+.slide-num {
+  font-size: .72rem; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 16px;
+}
+
+/* título do slide */
+.slide-title {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.05; letter-spacing: -2px;
+  margin-bottom: 40px;
+}
+.slide-title span { color: var(--gold); }
+
+/* bullets */
+.bullets { display: flex; flex-direction: column; gap: 16px; max-width: 700px; }
+.bullet {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-size: clamp(.9rem, 1.5vw, 1.1rem);
+  font-weight: 600; line-height: 1.5;
+}
+.bullet-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+/* grid de contribuições */
+.contrib-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  max-width: 900px;
+}
+.contrib-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.contrib-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 900; font-size: 1rem;
+  color: var(--gold); margin-bottom: 6px;
+}
+.contrib-role { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+
+/* slide de demonstração */
+.demo-area {
+  display: flex; gap: 32px; align-items: flex-start;
+  max-width: 900px; width: 100%;
+}
+.video-box {
+  flex: 1;
+  background: rgba(255,255,255,.04);
+  border: 2px dashed rgba(245,158,11,.4);
+  border-radius: 14px;
+  aspect-ratio: 16/9;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px; color: var(--muted);
+  font-size: .85rem; text-align: center;
+  padding: 20px;
+  /* SUBSTITUA O CONTEÚDO ABAIXO PELO SEU VÍDEO:
+     <video src="seu-video.mp4" controls style="width:100%;border-radius:10px;"></video>
+     OU se subir no YouTube:
+     <iframe src="https://www.youtube.com/embed/SEU_ID" ...></iframe>
+  */
+}
+.video-icon { font-size: 3rem; }
+.video-hint { font-size: .72rem; color: rgba(148,163,184,.5); margin-top: 4px; }
+
+.demo-right { display: flex; flex-direction: column; gap: 16px; min-width: 260px; }
+.link-box {
+  background: rgba(245,158,11,.08);
+  border: 1px solid rgba(245,158,11,.3);
+  border-radius: 12px;
+  padding: 20px;
+}
+.link-label { font-size: .7rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.link-url {
+  display: block;
+  font-size: .78rem; color: var(--text);
+  word-break: break-all; line-height: 1.6;
+  text-decoration: none;
+  font-weight: 600;
+}
+.btn-open {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 12px;
+  background: var(--gold); color: #0c1628;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800; font-size: .82rem;
+  padding: 10px 18px; border-radius: 8px;
+  border: none; cursor: pointer; transition: all .2s;
+  text-decoration: none;
+}
+.btn-open:hover { background: var(--gold2); transform: translateY(-1px); }
+
+/* slide de reflexão */
+.reflexao-item {
+  display: flex; align-items: flex-start; gap: 20px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px 24px;
+  max-width: 700px;
+}
+.reflexao-num {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: 2rem; color: rgba(245,158,11,.3);
+  line-height: 1; flex-shrink: 0;
+}
+.reflexao-text { font-size: 1rem; font-weight: 600; line-height: 1.6; color: var(--text); }
+
+/* slide de abertura */
+.opening { text-align: center; align-items: center; }
+.opening .slide-title { font-size: clamp(3rem, 7vw, 5.5rem); margin-bottom: 16px; }
+.opening-sub { font-size: 1rem; color: var(--muted); font-weight: 600; margin-bottom: 32px; }
+.opening-tags { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.tag {
+  background: rgba(255,255,255,.06); border: 1px solid var(--border);
+  border-radius: 100px; padding: 6px 16px;
+  font-size: .78rem; font-weight: 700; color: var(--muted);
+}
+
+/* ── BARRA INFERIOR DE NAVEGAÇÃO ── */
+.navbar {
+  position: relative; z-index: 10;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 16px 32px;
+  border-top: 1px solid var(--border);
+  background: rgba(12,22,40,.8);
+  backdrop-filter: blur(8px);
+}
+.nav-dot {
+  width: 8px; height: 8px; border-radius: 100px;
+  background: rgba(255,255,255,.15);
+  cursor: pointer; transition: all .2s;
+  border: none;
+}
+.nav-dot.active { background: var(--gold); width: 24px; }
+
+.btn-nav {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.06); border: 1px solid var(--border);
+  color: var(--text); border-radius: 50%;
+  width: 48px; height: 48px; font-size: 1.2rem;
+  cursor: pointer; transition: all .2s; z-index: 20;
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-nav:hover { background: rgba(245,158,11,.15); border-color: var(--gold); }
+.btn-prev { left: 16px; }
+.btn-next { right: 16px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">VozCliente</div>
+  <div class="topbar-info">Linguagem de Programação Web · UNIBRA</div>
+  <div class="slide-counter" id="counter">1 / 7</div>
+</div>
+
+<div class="stage">
+
+  <!-- SLIDE 0: ABERTURA -->
+  <div class="slide opening active" id="slide-0">
+    <h1 class="slide-title"><span>Voz</span>Cliente</h1>
+    <p class="opening-sub">Sistema de Feedback de Clientes · Projeto 3AV</p>
+    <div class="opening-tags">
+      <span class="tag">HTML</span>
+      <span class="tag">CSS</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">SweetAlert2</span>
+      <span class="tag">Netlify</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 1: TEMA E CONTEXTO -->
+  <div class="slide" id="slide-1">
+    <div class="slide-num">Seção 01</div>
+    <h2 class="slide-title">Tema e <span>Contexto</span></h2>
+    <div class="bullets">
+      <div class="bullet"><span class="bullet-icon">🎯</span> Sistema de coleta e análise de feedback de clientes</div>
+      <div class="bullet"><span class="bullet-icon">🏷️</span> Nome: <strong>VozCliente</strong></div>
+      <div class="bullet"><span class="bullet-icon">🏢</span> Útil para qualquer empresa que queira entender a opinião dos seus clientes</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: REQUISITOS -->
+  <div class="slide" id="slide-2">
+    <div class="slide-num">Seção 02</div>
+    <h2 class="slide-title"><span>Requisitos</span></h2>
+    <div class="bullets">
+      <div class="bullet"><span class="bullet-icon">✅</span> Cadastrar avaliações com nome, categoria, nota e comentário</div>
+      <div class="bullet"><span class="bullet-icon">✅</span> Visualizar feedbacks com filtro por nota</div>
+      <div class="bullet"><span class="bullet-icon">✅</span> Dashboard com métricas e gráficos em tempo real</div>
+      <div class="bullet"><span class="bullet-icon">✅</span> Editar e excluir registros na administração</div>
+      <div class="bullet"><span class="bullet-icon">✅</span> Busca por texto, categoria e nota</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: TECNOLOGIAS -->
+  <div class="slide" id="slide-3">
+    <div class="slide-num">Seção 03</div>
+    <h2 class="slide-title"><span>Tecnologias</span></h2>
+    <div class="bullets">
+      <div class="bullet"><span class="bullet-icon">🌐</span> <strong>HTML</strong> — estrutura das páginas</div>
+      <div class="bullet"><span class="bullet-icon">🎨</span> <strong>CSS</strong> — visual e estilização</div>
+      <div class="bullet"><span class="bullet-icon">⚙️</span> <strong>JavaScript</strong> — lógica do sistema</div>
+      <div class="bullet"><span class="bullet-icon">🔔</span> <strong>SweetAlert2</strong> — alertas personalizados</div>
+      <div class="bullet"><span class="bullet-icon">🚀</span> <strong>Netlify</strong> — hospedagem na internet</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: DEMONSTRAÇÃO -->
+  <div class="slide" id="slide-4">
+    <div class="slide-num">Seção 04</div>
+    <h2 class="slide-title"><span>Demonstração</span></h2>
+    <div class="demo-area">
+    <div class="video-box" style="padding:0; overflow:hidden; border-radius:14px;">
+  <video
+    width="100%"
+    height="100%"
+    controls
+    style="border-radius:12px; display:block;">
+    <source src="video.mp4" type="video/mp4">
+  </video>
+</div>
+      <div class="demo-right">
+        <div class="link-box">
+          <div class="link-label">🔗 Sistema Online</div>
+          <a class="link-url" href="https://graceful-strudel-8a9077.netlify.app" target="_blank">
+            graceful-strudel-8a9077.netlify.app
+          </a>
+          <a class="btn-open" href="https://graceful-strudel-8a9077.netlify.app" target="_blank">
+            Abrir sistema ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: CONTRIBUIÇÃO -->
+  <div class="slide" id="slide-5">
+    <div class="slide-num">Seção 05</div>
+    <h2 class="slide-title"><span>Contribuição</span></h2>
+    <div class="contrib-grid">
+      <div class="contrib-card">
+        <div class="contrib-name">Jefferson</div>
+        <div class="contrib-role">Tela de Início e organização geral do projeto</div>
+      </div>
+      <div class="contrib-card">
+        <div class="contrib-name">Cauã</div>
+        <div class="contrib-role">Formulário de Nova Avaliação e validações</div>
+      </div>
+      <div class="contrib-card">
+        <div class="contrib-name">Mizael</div>
+        <div class="contrib-role">Tela de Avaliações e filtro por nota</div>
+      </div>
+      <div class="contrib-card">
+        <div class="contrib-name">Davi</div>
+        <div class="contrib-role">Dashboard com gráficos e métricas</div>
+      </div>
+      <div class="contrib-card">
+        <div class="contrib-name">Pedro</div>
+        <div class="contrib-role">Tela de Administração com edição e exclusão</div>
+      </div>
+      <div class="contrib-card">
+        <div class="contrib-name">João</div>
+        <div class="contrib-role">Tela de Busca com filtros combinados</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: REFLEXÃO FINAL -->
+  <div class="slide" id="slide-6">
+    <div class="slide-num">Seção 06</div>
+    <h2 class="slide-title">Reflexão <span>Final</span></h2>
+    <div class="bullets">
+      <div class="bullet"><span class="bullet-icon">💡</span> HTML, CSS e JavaScript funcionam juntos para criar sistemas web completos</div>
+      <div class="bullet"><span class="bullet-icon">📚</span> Aprendemos a usar bibliotecas externas como o SweetAlert2</div>
+      <div class="bullet"><span class="bullet-icon">🌍</span> Aprendemos a fazer deploy de um sistema real na internet com o Netlify</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- botões laterais -->
+<button class="btn-nav btn-prev" onclick="changeSlide(-1)">‹</button>
+<button class="btn-nav btn-next" onclick="changeSlide(1)">›</button>
+
+<!-- dots de navegação -->
+<div class="navbar" id="dots"></div>
+
+<script>
+let current = 0;
+const total = 7;
+
+// cria os dots de navegação
+const dotsEl = document.getElementById('dots');
+for (let i = 0; i < total; i++) {
+  const d = document.createElement('button');
+  d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+}
+
+function goTo(n) {
+  document.getElementById('slide-' + current).classList.remove('active');
+  document.querySelectorAll('.nav-dot')[current].classList.remove('active');
+  current = (n + total) % total;
+  document.getElementById('slide-' + current).classList.add('active');
+  document.querySelectorAll('.nav-dot')[current].classList.add('active');
+  document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+}
+
+function changeSlide(dir) { goTo(current + dir); }
+
+// navegação pelo teclado
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+});
+</script>
+</body>
+</html>
