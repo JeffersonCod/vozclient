@@ -189,7 +189,7 @@ function renderAdmin() {
           <button class="btn" style="padding:5px 10px; font-size:.75rem; background:rgba(225,29,72,.12); color:#fb7185; border:1px solid rgba(225,29,72,.25);" onclick="deleteAdmin(${f.id})">✕</button>
         </div>
       </td>
-    </tr>`).join('');
+    </tr>`).join(' ');
 }
 
 // edita o título de um feedback via SweetAlert2 com input
