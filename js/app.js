@@ -64,12 +64,52 @@ document.getElementById('form-mood').querySelectorAll('.mood-btn').forEach(btn =
 });
 
 // ── FORMULÁRIO ──
-
 function submitForm() {
-  const name  = document.getElementById('f-name').value.trim();
-  const cat   = document.getElementById('f-cat').value;
-  const title = document.getElementById('f-title').value.trim();
+  const name    = document.getElementById('f-name').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const cat     = document.getElementById('f-cat').value;
+  const title   = document.getElementById('f-title').value.trim();
+  const comment = document.getElementById('f-comment').value.trim();
 
+  if (!name) {
+    alertCampoVazio('Nome obrigatório', 'Informe o nome do cliente.', 'f-name');
+    return;
+  }
+
+  if (name.length < 3) {
+    alertCampoVazio('Nome muito curto', 'O nome precisa ter pelo menos 3 caracteres.', 'f-name');
+    return;
+  }
+
+  if (email && !email.includes('@')) {
+    alertCampoVazio('E-mail inválido', 'Digite um e-mail válido ou deixe o campo vazio.', 'f-email');
+    return;
+  }
+
+  if (!cat) {
+    alertCampoVazio('Categoria obrigatória', 'Selecione uma categoria.', 'f-cat');
+    return;
+  }
+
+  if (!formRating) {
+    alertCampoVazio('Nota obrigatória', 'Clique nas estrelas para avaliar.', null);
+    return;
+  }
+
+  if (!title) {
+    alertCampoVazio('Título obrigatório', 'Adicione um título ao feedback.', 'f-title');
+    return;
+  }
+
+  if (title.length < 5) {
+    alertCampoVazio('Título muito curto', 'O título precisa ter pelo menos 5 caracteres.', 'f-title');
+    return;
+  }
+
+  if (comment && comment.length < 10) {
+    alertCampoVazio('Comentário muito curto', 'O comentário precisa ter pelo menos 10 caracteres.', 'f-comment');
+    return;
+  }
   // validações com SweetAlert2
   if (!name)       { alertCampoVazio('Nome obrigatório', 'Informe o nome do cliente.', 'f-name'); return; }
   if (!cat)        { alertCampoVazio('Categoria obrigatória', 'Selecione uma categoria.', 'f-cat'); return; }
